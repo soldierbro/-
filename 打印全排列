@@ -1,0 +1,44 @@
+#include<iostream>
+#include<string> 
+#include<vector>
+using namespace std;
+void perm(int a[],int low,int high,vector<int> &v,vector<vector<int> > &res)
+{
+	if(low==high)
+	{
+		for(int i=0;i<=low;i++)
+		{
+			v.push_back(a[i]);
+		}
+		res.push_back(v);
+		v.clear();
+	}
+	else
+	{
+		for(int i=low;i<=high;i++)
+		{
+			swap(a[i],a[low]);
+			perm(a,low+1,high,v,res);
+			swap(a[i],a[low]);
+		}
+	}
+}
+int main()
+{
+	int n;
+	vector<vector<int> > res;
+	vector<int> v;
+	cin>>n;
+	int a[n];
+	for(int i=0;i<n;i++)
+		a[i]=i+1;
+	perm(a,0,n-1,v,res);
+	for(int i=0;i<res.size();i++)
+	{
+		for(int j=0;j<res[i].size();j++)
+			cout<<res[i][j];
+		if(i!=res.size()-1)
+			cout<<endl;
+	}
+	return 0; 
+} 
